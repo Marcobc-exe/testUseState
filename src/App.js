@@ -10,7 +10,8 @@ const App = (props) => {
     setNewNote(event.target.value)
   }
 
-  const handleClick = (event) => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
     console.log("crear nota")
     const noteToAddToState = {
       id: notes.length +1,
@@ -20,6 +21,10 @@ const App = (props) => {
     }
     console.log(noteToAddToState)
     setNotes(notes.concat(noteToAddToState))
+    /* setNotes([
+      ...notes, 
+      noteToAddToState
+    ]) */
   }
 
   return (
@@ -28,8 +33,10 @@ const App = (props) => {
       <ol>
         {notes.map(note => <Note key={note.id} {...note} />)}
       </ol>
+      <form onSubmit={handleSubmit}>
       <input type='text' placeholder='Escribir aquí' onChange={handleChange} />
-      <button onClick={handleClick}>Crear nota</button>
+      <button>Crear nota</button>
+      </form>
     </div>
   );
 }
